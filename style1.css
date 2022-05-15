@@ -418,13 +418,71 @@ img[alt ="pause-icon"] {
     align-self: flex-end ;
 
 }
+.note{
+    position:absolute;
+    z-index:99;
+    font-family:cursive;
+    color:grey;
+    margin-left:113px;
+    margin-top:33px;
+    text-align:center;
+    font-size: 50%;
+}
+.player_mute{
+    all: unset ;
+    z-index: 100 ;
+    position:absolute;
+    margin-top:36px;
+    margin-left:202px;
+    width: 2.5em ;
+    height: 2.5em ;
+    background:none;
+    border:none;
+    cursor: pointer ;
+}
+.vol_mute{
+    width: 2.5em ;
+    height: 2.5em ;
+}
+
+.player_unmute{
+    all: unset ;
+    z-index: 100 ;
+    position:absolute;
+    opacity:80%;
+    margin-top:36px;
+    margin-left:55px;
+    width: 2.5em ;
+    height: 2.5em ;
+    background:none;
+    border:none;
+    cursor: pointer ;
+}
+
+.volume-slider-con{
+    width:17em;
+    z-index:100;
+    position:absolute;
+    height: .25em ;
+    margin-top: 180px;
+    cursor: pointer ;
+    border-radius: 3em ;
+    touch-action : none ;
+    background-color:  #e5e7ea;
+    transition: width var(--cubic-header) ;
+    background-color:#ddd;
+  }
+  .volume-slider{
+     height:100%;
+     width:100%;
+     z-index:100;
+     border-radius:3em;
+     position:relative;
+     background-color:grey;
+  }
 
 .audio {
 
     display:  none !important ;
-
 }
-
-
-
 
