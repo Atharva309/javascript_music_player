@@ -4,7 +4,10 @@ const bgBody = ["#e5e7e9", "#ff4545", "#f8ded3", "#ffc382", "#f5eda6", "pink"];
 
 var bgimg=['https://d1csarkz8obe9u.cloudfront.net/posterpreviews/aurora-borealis-zoom-background-design-template-a2648c6510820009e2fea2289582bddd_screen.jpg?ts=1602879897',
 'https://s3.envato.com/files/4ce79e7d-da4f-4c46-937f-5bd8096d0dab/inline_image_preview.jpg',
-'https://lh3.googleusercontent.com/pw/AM-JKLUDtugoeBxFDLIqC2pQC-Jd8qqEw4lJr6bdbGOALpSLC4Bt8uCZD1eWMwMpDF-ln6bgeaUHOXIVKRYAu3F5Zk29MQrNU-_Enx2zMABqleAdmiUi1xm8a2NT88M9-mbFshqlzZD4yPP9sJyoEwJTnVQI=w1280-h719-no?authuser=0'
+'https://media.istockphoto.com/photos/blurred-abstract-bokeh-background-picture-id1172073205?k=20&m=1172073205&s=612x612&w=0&h=4-ZyzTKe8ORqGle1kdYn0Hw7TgCX-MLAzL3l29v0EXM=',
+'https://ak.picdn.net/shutterstock/videos/1802390/thumb/1.jpg',
+'https://mspoweruser.com/wp-content/uploads/2019/05/build-wallpaper-1200x675.jpg',
+'https://wallpaperaccess.com/full/2113857.jpg'
 
 ];
 
@@ -33,6 +36,65 @@ const pauseIcon = playButton.querySelector("img[alt = 'pause-icon']");
 const playIcon = playButton.querySelector("img[alt = 'play-icon']");
 const progres = player.querySelector(".progres");
 const progresFilled = progres.querySelector(".progres__filled");
+const volmute = document.querySelector(".player_mute");
+const volunmute = document.querySelector(".player_unmute");
+
+
+var e = document.querySelector('.volume-slider-con');
+var eInner = document.querySelector('.volume-slider');
+var drag = false;
+var audio= document.querySelectorAll('audio').forEach(function(audio){
+e.addEventListener('mousedown',function(ev){
+   drag = true;
+   updateBar(ev.clientX);
+});
+document.addEventListener('mousemove',function(ev){
+   if(drag){
+      updateBar(ev.clientX);
+   }
+});
+document.addEventListener('mouseup',function(ev){
+ drag = false;
+});
+
+var updateBar = function (x, vol) {
+   var volume = e;
+        var percentage;
+        //if only volume have specificed
+        //then direct update volume
+        if (vol) {
+            percentage = vol * 100;
+        } else {
+            var position = x - volume.offsetLeft;
+            percentage = 100 * position / volume.clientWidth;
+        }
+
+        if (percentage > 100) {
+            percentage = 100;
+        }
+        if (percentage < 0) {
+            percentage = 0;
+        }
+
+        //update volume bar and video volume
+        eInner.style.width = percentage +'%';
+        audio.volume = percentage / 100;
+};
+
+});
+
+volmute.addEventListener("click", (e) => {
+    [].slice.call(document.querySelectorAll('audio')).forEach(function(audio) {
+        audio.muted = true;
+    });
+});
+
+volunmute.addEventListener("click", (e) => {
+    [].slice.call(document.querySelectorAll('audio')).forEach(function(audio) {
+        audio.muted = false;
+    });
+});
+
 let isMove = false;
 
 function openPlayer() {
@@ -82,7 +144,6 @@ function back(index) {
     sliderContent.style.transform = `translate3d(-${left}%, 0, 0)`;
     count--;
     run();
-
 }
 
 function changeSliderContext() {
@@ -190,10 +251,9 @@ function durationSongs() {
     if (sec < 10) sec = "0" + sec;
     
     const playerSongTime = `${min}:${sec}`;
+ 
     this.closest(".player__song").querySelector(".player__song-time").append(playerSongTime);
-
 }
-
 
 changeSliderContext();
 
